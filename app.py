@@ -23,11 +23,15 @@ class Calculator(tk.Tk):
         self.geometry("330x480+1000+800")
         #self.resizable(False, False)
 
+
+        self.val = tk.IntVar()
+
+
         container = ttk.Frame(self)
         container.grid(row=0, column=0, sticky="nsew")
 
 
-        display = ttk.Label(container, text="Testik", font=("Segoe UI", 40), background="grey")
+        display = ttk.Label(container, text="Testik", font=("Segoe UI", 40), textvariable=self.val)
         display.grid(row=0, column=0, sticky="ne", padx=15, pady=20)
 
 
@@ -38,19 +42,29 @@ class Calculator(tk.Tk):
         container.rowconfigure(0, weight=1)
         container.columnconfigure(0, weight=1)
 
-
         row = 0
         for rows in calc:
             col = 0
             for key, value in rows.items():
-                button = tk.Button(keypad, text=key, height=1, width=4, font=("Segoe UI bold", 20), foreground=value[1])
+                button = tk.Button(
+                    keypad,
+                    text=key,
+                    height=1,
+                    width=4,
+                    font=("Segoe UI bold", 20),
+                    foreground=value[1],
+                    command=self.addval(value[0])
+                )
                 button.grid(row=row, column=col, columnspan=value[0], padx=2, pady=2)
-
-
-
                 col += value[0]
             row += 1
 
+        but = ttk.Button(container, command=self.addval)
+        but.grid(row=2, column=1)
+
+    def addval(self, v):
+
+        self.val.set(v)
 
 
 root = Calculator()
