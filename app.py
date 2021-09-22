@@ -5,6 +5,7 @@ import tkinter.font as font
 
 RED = "red"
 BLACK = "black"
+rovnice = ""
 
 
 class Calculator(tk.Tk):
@@ -16,7 +17,10 @@ class Calculator(tk.Tk):
         #self.resizable(False, False)
 
 
-        self.val = tk.IntVar()
+        self.val = tk.StringVar()
+
+        self.val.set("0")
+
 
 
         container = ttk.Frame(self)
@@ -86,7 +90,7 @@ class Calculator(tk.Tk):
             width=4,
             font=("Segoe UI bold", 20),
             foreground=BLACK,
-
+            command=lambda: self.addval("7")
         )
         button_05.grid(row=2, column=0, padx=2, pady=2)
 
@@ -97,7 +101,7 @@ class Calculator(tk.Tk):
             width=4,
             font=("Segoe UI bold", 20),
             foreground=BLACK,
-
+            command=lambda: self.addval("8")
         )
         button_06.grid(row=2, column=1, padx=2, pady=2)
 
@@ -107,8 +111,7 @@ class Calculator(tk.Tk):
             height=1,
             width=4,
             font=("Segoe UI bold", 20),
-            foreground=BLACK,
-
+            foreground=BLACK
         )
         button_07.grid(row=2, column=2, padx=2, pady=2)
 
@@ -118,8 +121,7 @@ class Calculator(tk.Tk):
             height=1,
             width=4,
             font=("Segoe UI bold", 20),
-            foreground=BLACK,
-
+            foreground=BLACK
         )
         button_08.grid(row=2, column=3, padx=2, pady=2)
 
@@ -129,8 +131,7 @@ class Calculator(tk.Tk):
             height=1,
             width=4,
             font=("Segoe UI bold", 20),
-            foreground=BLACK,
-
+            foreground=BLACK
         )
         button_09.grid(row=3, column=0, padx=2, pady=2)
 
@@ -140,8 +141,7 @@ class Calculator(tk.Tk):
             height=1,
             width=4,
             font=("Segoe UI bold", 20),
-            foreground=BLACK,
-
+            foreground=BLACK
         )
         button_10.grid(row=3, column=1, padx=2, pady=2)
 
@@ -151,8 +151,7 @@ class Calculator(tk.Tk):
             height=1,
             width=4,
             font=("Segoe UI bold", 20),
-            foreground=BLACK,
-
+            foreground=BLACK
         )
         button_11.grid(row=3, column=2, padx=2, pady=2)
 
@@ -162,8 +161,7 @@ class Calculator(tk.Tk):
             height=1,
             width=4,
             font=("Segoe UI bold", 20),
-            foreground=BLACK,
-
+            foreground=BLACK
         )
         button_12.grid(row=3, column=3, padx=2, pady=2)
 
@@ -173,8 +171,7 @@ class Calculator(tk.Tk):
             height=1,
             width=4,
             font=("Segoe UI bold", 20),
-            foreground=BLACK,
-
+            foreground=BLACK
         )
         button_13.grid(row=4, column=0, padx=2, pady=2)
 
@@ -184,8 +181,7 @@ class Calculator(tk.Tk):
             height=1,
             width=4,
             font=("Segoe UI bold", 20),
-            foreground=BLACK,
-
+            foreground=BLACK
         )
         button_14.grid(row=4, column=1, padx=2, pady=2)
 
@@ -195,8 +191,7 @@ class Calculator(tk.Tk):
             height=1,
             width=4,
             font=("Segoe UI bold", 20),
-            foreground=BLACK,
-
+            foreground=BLACK
         )
         button_15.grid(row=4, column=2, padx=2, pady=2)
 
@@ -206,8 +201,7 @@ class Calculator(tk.Tk):
             height=1,
             width=4,
             font=("Segoe UI bold", 20),
-            foreground=BLACK,
-
+            foreground=BLACK
         )
         button_16.grid(row=4, column=3, padx=2, pady=2)
 
@@ -217,8 +211,7 @@ class Calculator(tk.Tk):
             height=1,
             width=4,
             font=("Segoe UI bold", 20),
-            foreground=BLACK,
-
+            foreground=BLACK
         )
         button_17.grid(row=5, column=0, padx=2, pady=2)
 
@@ -228,8 +221,7 @@ class Calculator(tk.Tk):
             height=1,
             width=4,
             font=("Segoe UI bold", 20),
-            foreground=BLACK,
-
+            foreground=BLACK
         )
         button_18.grid(row=5, column=1, padx=2, pady=2)
 
@@ -239,8 +231,7 @@ class Calculator(tk.Tk):
             height=1,
             width=4,
             font=("Segoe UI bold", 20),
-            foreground=BLACK,
-
+            foreground=BLACK
         )
         button_19.grid(row=5, column=2, padx=2, pady=2)
 
@@ -250,14 +241,17 @@ class Calculator(tk.Tk):
             height=1,
             width=4,
             font=("Segoe UI bold", 20),
-            foreground=BLACK,
-
+            foreground=BLACK
         )
         button_20.grid(row=5, column=3, padx=2, pady=2)
 
     def addval(self, v):
 
-        self.val.set(v)
+        global rovnice
+
+        rovnice += v
+
+        self.val.set(rovnice)
 
 
 root = Calculator()
