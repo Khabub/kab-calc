@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk
-import tkinter.font as font
 
 
 RED = "red"
@@ -13,19 +12,15 @@ class Calculator(tk.Tk):
 
         self.title("Kabub Calculator")
         self.geometry("330x480+1000+800")
-        #self.resizable(False, False)
-
-
+        self.resizable(False, False)
         self.val = tk.StringVar()
         self.val.set("0")
         self.rovnice = ""
 
-
         container = ttk.Frame(self)
         container.grid(row=0, column=0, sticky="nsew")
 
-
-        display = ttk.Label(container, text="Testik", font=("Segoe UI bold", 30), textvariable=self.val)
+        display = ttk.Label(container, font=("Segoe UI bold", 30), textvariable=self.val)
 
         display.grid(row=0, column=0, sticky="ne", padx=15, pady=20)
 
@@ -287,14 +282,14 @@ class Calculator(tk.Tk):
             self.val.set(str(res))
             self.rovnice = str(res)
 
-        except Exception:
+        except SyntaxError:
             self.val.set("Error")
             self.rovnice = ""
 
 
 root = Calculator()
 
-#font.nametofont("TkDefaultFont").configure(size=15)
+# font.nametofont("TkDefaultFont").configure(size=15)
 
 # root.columnconfigure(0, weight=1)
 # root.rowconfigure(0, weight=1)
