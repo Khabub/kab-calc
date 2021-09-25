@@ -43,6 +43,7 @@ class Calculator(tk.Tk):
 
         )
         self.button_01.grid(row=1, column=0, padx=2, pady=2)
+        self.bind("<c>", lambda x: self.clear_num())
 
         # button_02 = tk.Button(
         #     keypad,
@@ -78,6 +79,7 @@ class Calculator(tk.Tk):
             command=lambda: self.remove_num()
         )
         self.button_04.grid(row=1, column=3, padx=2, pady=2)
+        self.bind("<BackSpace>", lambda x: self.remove_num())
 
         self.button_05 = tk.Button(
             self.keypad,
@@ -89,6 +91,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("7")
         )
         self.button_05.grid(row=2, column=0, padx=2, pady=2)
+        self.bind("<7>", lambda x: self.addval("7"))
 
 
         self.button_06 = tk.Button(
@@ -101,6 +104,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("8")
         )
         self.button_06.grid(row=2, column=1, padx=2, pady=2)
+        self.bind("<8>", lambda x: self.addval("8"))
 
         self.button_07 = tk.Button(
             self.keypad,
@@ -112,6 +116,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("9")
         )
         self.button_07.grid(row=2, column=2, padx=2, pady=2)
+        self.bind("<9>", lambda x: self.addval("9"))
 
         self.button_08 = tk.Button(
             self.keypad,
@@ -123,6 +128,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("/")
         )
         self.button_08.grid(row=2, column=3, padx=2, pady=2)
+        self.bind("<slash>", lambda x: self.addval("/"))
 
         self.button_09 = tk.Button(
             self.keypad,
@@ -134,6 +140,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("4")
         )
         self.button_09.grid(row=3, column=0, padx=2, pady=2)
+        self.bind_all("<4>", lambda x: self.addval("4"))
 
         self.button_10 = tk.Button(
             self.keypad,
@@ -145,6 +152,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("5")
         )
         self.button_10.grid(row=3, column=1, padx=2, pady=2)
+        self.bind("<5>", lambda x: self.addval("5"))
 
         self.button_11 = tk.Button(
             self.keypad,
@@ -156,6 +164,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("6")
         )
         self.button_11.grid(row=3, column=2, padx=2, pady=2)
+        self.bind("<6>", lambda x: self.addval("6"))
 
         self.button_12 = tk.Button(
             self.keypad,
@@ -167,6 +176,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("*")
         )
         self.button_12.grid(row=3, column=3, padx=2, pady=2)
+        self.bind("<asterisk>", lambda x: self.addval("*"))
 
         self.button_13 = tk.Button(
             self.keypad,
@@ -178,6 +188,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("1")
         )
         self.button_13.grid(row=4, column=0, padx=2, pady=2)
+        self.bind("<1>", lambda x: self.addval("1"))
 
         self.button_14 = tk.Button(
             self.keypad,
@@ -189,6 +200,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("2")
         )
         self.button_14.grid(row=4, column=1, padx=2, pady=2)
+        self.bind("<2>", lambda x: self.addval("2"))
 
         self.button_15 = tk.Button(
             self.keypad,
@@ -200,6 +212,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("3")
         )
         self.button_15.grid(row=4, column=2, padx=2, pady=2)
+        self.bind("<3>", lambda x: self.addval("3"))
 
         self.button_16 = tk.Button(
             self.keypad,
@@ -211,6 +224,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("-")
         )
         self.button_16.grid(row=4, column=3, padx=2, pady=2)
+        self.bind("<minus>", lambda x: self.addval("-"))
 
         self.button_17 = tk.Button(
             self.keypad,
@@ -222,6 +236,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("0")
         )
         self.button_17.grid(row=5, column=0, padx=2, pady=2)
+        self.bind("<0>", lambda x: self.addval("0"))
 
         self.button_18 = tk.Button(
             self.keypad,
@@ -233,6 +248,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval(".")
         )
         self.button_18.grid(row=5, column=1, padx=2, pady=2)
+        self.bind("<.>", lambda x: self.addval("."))
 
         self.button_19 = tk.Button(
             self.keypad,
@@ -244,6 +260,7 @@ class Calculator(tk.Tk):
             command=lambda: self.result()
         )
         self.button_19.grid(row=5, column=2, padx=2, pady=2)
+        self.bind("<Return>", lambda x: self.result())
 
         self.button_20 = tk.Button(
             self.keypad,
@@ -255,6 +272,8 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("+")
         )
         self.button_20.grid(row=5, column=3, padx=2, pady=2)
+        self.bind("<plus>", lambda x: self.addval("+"))
+
 
     def addval(self, v):
         self.rovnice += v
@@ -274,7 +293,7 @@ class Calculator(tk.Tk):
 
         print(self.rovnice)
 
-    def result(self):
+    def result(self, event=0):
         try:
             res = eval(self.rovnice)
             if res % 1 == 0:
@@ -284,20 +303,13 @@ class Calculator(tk.Tk):
             self.val.set(str(res))
             self.rovnice = str(res)
 
-        except Exception:
+        except SyntaxError:
             self.val.set("Error")
             self.rovnice = ""
-
-    def testfce(self):
-        print("ahoj")
-
-
-        self.bind('<KP_7>', self.testfce)
 
 
 
 root = Calculator()
-
 
 
 #font.nametofont("TkDefaultFont").configure(size=15)
