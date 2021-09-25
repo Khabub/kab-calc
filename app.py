@@ -12,28 +12,28 @@ class Calculator(tk.Tk):
         super().__init__(*args, **kwargs)
 
         self.title("Kabub Calculator")
-        self.geometry("330x480+1000+800")
-        #self.resizable(False, False)
+        self.geometry("350x470+1000+800")
+        self.resizable(False, False)
 
         self.val = tk.StringVar()
         self.val.set("0")
         self.rovnice = ""
 
-        container = ttk.Frame(self)
-        container.grid(row=0, column=0, sticky="nsew")
+        self.container = ttk.Frame(self, relief="ridge")
+        self.container.grid(row=0, column=0, padx=(10, 10), sticky="nsew")
 
-        display = ttk.Label(container, text="Testik", font=("Segoe UI bold", 30), textvariable=self.val)
-        display.grid(row=0, column=0, sticky="ne", padx=15, pady=20)
+        self.display = ttk.Label(self.container, text="Testik", font=("Segoe UI bold", 30), textvariable=self.val)
+        self.display.grid(row=0, column=0, sticky="ne", padx=15, pady=20)
 
-        keypad = ttk.Frame(container)
-        keypad.grid(row=1, column=0, sticky="swe", padx=10, pady=10)
+        self.keypad = ttk.Frame(self.container)
+        self.keypad.grid(row=1, column=0, sticky="swe", padx=10, pady=10)
 
-        container.rowconfigure(0, weight=1)
-        container.columnconfigure(0, weight=1)
+        self.container.rowconfigure(0, weight=1)
+        self.container.columnconfigure(0, weight=1)
 
         # Keypad buttons
-        button_01 = tk.Button(
-            keypad,
+        self.button_01 = tk.Button(
+            self.keypad,
             text="C",
             height=1,
             width=4,
@@ -42,34 +42,34 @@ class Calculator(tk.Tk):
             command=lambda: self.clear_num()
 
         )
-        button_01.grid(row=1, column=0, padx=2, pady=2)
+        self.button_01.grid(row=1, column=0, padx=2, pady=2)
 
-        button_02 = tk.Button(
-            keypad,
-            text="NA",
-            height=1,
-            width=4,
-            font=("Segoe UI bold", 20),
-            cursor="hand2",
-            foreground=BLACK,
-            # command=lambda: self.addval("")
+        # button_02 = tk.Button(
+        #     keypad,
+        #     text="NA",
+        #     height=1,
+        #     width=4,
+        #     font=("Segoe UI bold", 20),
+        #     cursor="hand2",
+        #     foreground=BLACK,
+        #     # command=lambda: self.addval("")
+        #
+        # )
+        # button_02.grid(row=1, column=1, padx=2, pady=2)
+        #
+        # button_03 = tk.Button(
+        #     keypad,
+        #     text="NA",
+        #     height=1,
+        #     width=4,
+        #     font=("Segoe UI bold", 20),
+        #     foreground=BLACK,
+        #     # command=lambda: self.addval("")
+        # )
+        # button_03.grid(row=1, column=2, padx=2, pady=2)
 
-        )
-        button_02.grid(row=1, column=1, padx=2, pady=2)
-
-        button_03 = tk.Button(
-            keypad,
-            text="NA",
-            height=1,
-            width=4,
-            font=("Segoe UI bold", 20),
-            foreground=BLACK,
-            # command=lambda: self.addval("")
-        )
-        button_03.grid(row=1, column=2, padx=2, pady=2)
-
-        button_04 = tk.Button(
-            keypad,
+        self.button_04 = tk.Button(
+            self.keypad,
             text="DEL",
             height=1,
             width=4,
@@ -77,10 +77,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.remove_num()
         )
-        button_04.grid(row=1, column=3, padx=2, pady=2)
+        self.button_04.grid(row=1, column=3, padx=2, pady=2)
 
-        button_05 = tk.Button(
-            keypad,
+        self.button_05 = tk.Button(
+            self.keypad,
             text="7",
             height=1,
             width=4,
@@ -88,10 +88,11 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval("7")
         )
-        button_05.grid(row=2, column=0, padx=2, pady=2)
+        self.button_05.grid(row=2, column=0, padx=2, pady=2)
 
-        button_06 = tk.Button(
-            keypad,
+
+        self.button_06 = tk.Button(
+            self.keypad,
             text="8",
             height=1,
             width=4,
@@ -99,10 +100,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval("8")
         )
-        button_06.grid(row=2, column=1, padx=2, pady=2)
+        self.button_06.grid(row=2, column=1, padx=2, pady=2)
 
-        button_07 = tk.Button(
-            keypad,
+        self.button_07 = tk.Button(
+            self.keypad,
             text="9",
             height=1,
             width=4,
@@ -110,10 +111,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval("9")
         )
-        button_07.grid(row=2, column=2, padx=2, pady=2)
+        self.button_07.grid(row=2, column=2, padx=2, pady=2)
 
-        button_08 = tk.Button(
-            keypad,
+        self.button_08 = tk.Button(
+            self.keypad,
             text="/",
             height=1,
             width=4,
@@ -121,10 +122,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval("/")
         )
-        button_08.grid(row=2, column=3, padx=2, pady=2)
+        self.button_08.grid(row=2, column=3, padx=2, pady=2)
 
-        button_09 = tk.Button(
-            keypad,
+        self.button_09 = tk.Button(
+            self.keypad,
             text="4",
             height=1,
             width=4,
@@ -132,10 +133,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval("4")
         )
-        button_09.grid(row=3, column=0, padx=2, pady=2)
+        self.button_09.grid(row=3, column=0, padx=2, pady=2)
 
-        button_10 = tk.Button(
-            keypad,
+        self.button_10 = tk.Button(
+            self.keypad,
             text="5",
             height=1,
             width=4,
@@ -143,10 +144,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval("5")
         )
-        button_10.grid(row=3, column=1, padx=2, pady=2)
+        self.button_10.grid(row=3, column=1, padx=2, pady=2)
 
-        button_11 = tk.Button(
-            keypad,
+        self.button_11 = tk.Button(
+            self.keypad,
             text="6",
             height=1,
             width=4,
@@ -154,10 +155,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval("6")
         )
-        button_11.grid(row=3, column=2, padx=2, pady=2)
+        self.button_11.grid(row=3, column=2, padx=2, pady=2)
 
-        button_12 = tk.Button(
-            keypad,
+        self.button_12 = tk.Button(
+            self.keypad,
             text="*",
             height=1,
             width=4,
@@ -165,10 +166,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval("*")
         )
-        button_12.grid(row=3, column=3, padx=2, pady=2)
+        self.button_12.grid(row=3, column=3, padx=2, pady=2)
 
-        button_13 = tk.Button(
-            keypad,
+        self.button_13 = tk.Button(
+            self.keypad,
             text="1",
             height=1,
             width=4,
@@ -176,10 +177,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval("1")
         )
-        button_13.grid(row=4, column=0, padx=2, pady=2)
+        self.button_13.grid(row=4, column=0, padx=2, pady=2)
 
-        button_14 = tk.Button(
-            keypad,
+        self.button_14 = tk.Button(
+            self.keypad,
             text="2",
             height=1,
             width=4,
@@ -187,10 +188,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval("2")
         )
-        button_14.grid(row=4, column=1, padx=2, pady=2)
+        self.button_14.grid(row=4, column=1, padx=2, pady=2)
 
-        button_15 = tk.Button(
-            keypad,
+        self.button_15 = tk.Button(
+            self.keypad,
             text="3",
             height=1,
             width=4,
@@ -198,10 +199,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval("3")
         )
-        button_15.grid(row=4, column=2, padx=2, pady=2)
+        self.button_15.grid(row=4, column=2, padx=2, pady=2)
 
-        button_16 = tk.Button(
-            keypad,
+        self.button_16 = tk.Button(
+            self.keypad,
             text="-",
             height=1,
             width=4,
@@ -209,10 +210,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval("-")
         )
-        button_16.grid(row=4, column=3, padx=2, pady=2)
+        self.button_16.grid(row=4, column=3, padx=2, pady=2)
 
-        button_17 = tk.Button(
-            keypad,
+        self.button_17 = tk.Button(
+            self.keypad,
             text="0",
             height=1,
             width=4,
@@ -220,10 +221,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval("0")
         )
-        button_17.grid(row=5, column=0, padx=2, pady=2)
+        self.button_17.grid(row=5, column=0, padx=2, pady=2)
 
-        button_18 = tk.Button(
-            keypad,
+        self.button_18 = tk.Button(
+            self.keypad,
             text=".",
             height=1,
             width=4,
@@ -231,10 +232,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval(".")
         )
-        button_18.grid(row=5, column=1, padx=2, pady=2)
+        self.button_18.grid(row=5, column=1, padx=2, pady=2)
 
-        button_19 = tk.Button(
-            keypad,
+        self.button_19 = tk.Button(
+            self.keypad,
             text="=",
             height=1,
             width=4,
@@ -242,10 +243,10 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.result()
         )
-        button_19.grid(row=5, column=2, padx=2, pady=2)
+        self.button_19.grid(row=5, column=2, padx=2, pady=2)
 
-        button_20 = tk.Button(
-            keypad,
+        self.button_20 = tk.Button(
+            self.keypad,
             text="+",
             height=1,
             width=4,
@@ -253,7 +254,7 @@ class Calculator(tk.Tk):
             foreground=BLACK,
             command=lambda: self.addval("+")
         )
-        button_20.grid(row=5, column=3, padx=2, pady=2)
+        self.button_20.grid(row=5, column=3, padx=2, pady=2)
 
     def addval(self, v):
         self.rovnice += v
@@ -287,9 +288,17 @@ class Calculator(tk.Tk):
             self.val.set("Error")
             self.rovnice = ""
 
+    def testfce(self):
+        print("ahoj")
+
+
+        self.bind('<KP_7>', self.testfce)
+
 
 
 root = Calculator()
+
+
 
 #font.nametofont("TkDefaultFont").configure(size=15)
 
