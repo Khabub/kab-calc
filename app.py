@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-import tkinter.font as font
+# import tkinter.font as font
 
 
 RED = "red"
@@ -22,7 +22,7 @@ class Calculator(tk.Tk):
         self.container = ttk.Frame(self, relief="ridge")
         self.container.grid(row=0, column=0, padx=(10, 10), sticky="nsew")
 
-        self.display = ttk.Label(self.container, text="Testik", font=("Segoe UI bold", 30), textvariable=self.val)
+        self.display = ttk.Label(self.container, font=("Segoe UI bold", 30), textvariable=self.val)
         self.display.grid(row=0, column=0, sticky="ne", padx=15, pady=20)
 
         self.keypad = ttk.Frame(self.container)
@@ -91,8 +91,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("7")
         )
         self.button_05.grid(row=2, column=0, padx=2, pady=2)
-        self.bind("<7>", lambda x: self.addval("7"))
-
+        self.bind("<Key-7>", lambda x: self.addval("7"))
 
         self.button_06 = tk.Button(
             self.keypad,
@@ -116,7 +115,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("9")
         )
         self.button_07.grid(row=2, column=2, padx=2, pady=2)
-        self.bind("<9>", lambda x: self.addval("9"))
+        self.bind("<Key-9>", lambda x: self.addval("9"))
 
         self.button_08 = tk.Button(
             self.keypad,
@@ -140,7 +139,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("4")
         )
         self.button_09.grid(row=3, column=0, padx=2, pady=2)
-        self.bind_all("<4>", lambda x: self.addval("4"))
+        self.bind_all("<Key-4>", lambda x: self.addval("4"))
 
         self.button_10 = tk.Button(
             self.keypad,
@@ -152,7 +151,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("5")
         )
         self.button_10.grid(row=3, column=1, padx=2, pady=2)
-        self.bind("<5>", lambda x: self.addval("5"))
+        self.bind("<Key-5>", lambda x: self.addval("5"))
 
         self.button_11 = tk.Button(
             self.keypad,
@@ -164,7 +163,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("6")
         )
         self.button_11.grid(row=3, column=2, padx=2, pady=2)
-        self.bind("<6>", lambda x: self.addval("6"))
+        self.bind("<Key-6>", lambda x: self.addval("6"))
 
         self.button_12 = tk.Button(
             self.keypad,
@@ -188,7 +187,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("1")
         )
         self.button_13.grid(row=4, column=0, padx=2, pady=2)
-        self.bind("<1>", lambda x: self.addval("1"))
+        self.bind("<Key-1>", lambda x: self.addval("1"))
 
         self.button_14 = tk.Button(
             self.keypad,
@@ -200,7 +199,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("2")
         )
         self.button_14.grid(row=4, column=1, padx=2, pady=2)
-        self.bind("<2>", lambda x: self.addval("2"))
+        self.bind("<Key-2>", lambda x: self.addval("2"))
 
         self.button_15 = tk.Button(
             self.keypad,
@@ -212,7 +211,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("3")
         )
         self.button_15.grid(row=4, column=2, padx=2, pady=2)
-        self.bind("<3>", lambda x: self.addval("3"))
+        self.bind("<Key-3>", lambda x: self.addval("3"))
 
         self.button_16 = tk.Button(
             self.keypad,
@@ -236,7 +235,7 @@ class Calculator(tk.Tk):
             command=lambda: self.addval("0")
         )
         self.button_17.grid(row=5, column=0, padx=2, pady=2)
-        self.bind("<0>", lambda x: self.addval("0"))
+        self.bind("<Key-0>", lambda x: self.addval("0"))
 
         self.button_18 = tk.Button(
             self.keypad,
@@ -274,7 +273,6 @@ class Calculator(tk.Tk):
         self.button_20.grid(row=5, column=3, padx=2, pady=2)
         self.bind("<plus>", lambda x: self.addval("+"))
 
-
     def addval(self, v):
         self.rovnice += v
         self.val.set(self.rovnice)
@@ -291,9 +289,7 @@ class Calculator(tk.Tk):
             self.rovnice = ""
             self.val.set("0")
 
-        print(self.rovnice)
-
-    def result(self, event=0):
+    def result(self):
         try:
             res = eval(self.rovnice)
             if res % 1 == 0:
@@ -308,12 +304,9 @@ class Calculator(tk.Tk):
             self.rovnice = ""
 
 
-
 root = Calculator()
 
-
-#font.nametofont("TkDefaultFont").configure(size=15)
-
+# font.nametofont("TkDefaultFont").configure(size=15)
 # root.columnconfigure(0, weight=1)
 # root.rowconfigure(0, weight=1)
 
