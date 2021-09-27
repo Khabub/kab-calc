@@ -14,7 +14,7 @@ class Calculator(tk.Tk):
         self.title("Kabub Calculator")
 
         self.geometry("350x470+1000+800")
-        self.resizable(False, False)
+        # self.resizable(False, False)
 
         self.val = tk.StringVar()
         self.val.set("0")
@@ -69,17 +69,16 @@ class Calculator(tk.Tk):
         #     # command=lambda: self.addval("")
         # )
         # button_03.grid(row=1, column=2, padx=2, pady=2)
+        self.kp = ttk.Style()
 
-        self.button_04 = tk.Button(
+        self.button_04 = ttk.Button(
             self.keypad,
             text="DEL",
-            height=1,
-            width=4,
-            font=("Segoe UI bold", 20),
-            foreground=BLACK,
+            cursor="hand2",
             command=lambda: self.remove_num()
         )
-        self.button_04.grid(row=1, column=3, padx=2, pady=2)
+        self.button_04.grid(row=1, column=3, padx=2, pady=2, ipady=40)
+        self.kp.configure("TButton", background="blue", font=("Helvetica bold", 20))
         self.bind("<BackSpace>", lambda x: self.remove_num())
 
         self.button_05 = tk.Button(
