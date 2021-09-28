@@ -25,7 +25,11 @@ class Calculator(tk.Tk):
         self.container = ttk.Frame(self, relief="ridge")
         self.container.grid(row=0, column=0, padx=(10, 10), sticky="nsew")
 
-        self.display = ttk.Label(self.container, font=("Segoe UI bold", 30), textvariable=self.val)
+        self.display = ttk.Label(
+            self.container,
+            font=("Segoe UI bold", 30),
+            textvariable=self.val,
+        )
         self.display.grid(row=0, column=0, sticky="ne", padx=15, pady=20)
 
         self.keypad = ttk.Frame(self.container)
@@ -246,8 +250,9 @@ class Calculator(tk.Tk):
             child.grid_configure(sticky="nsew", padx=2, pady=2, ipady=7)
 
     def addval(self, v):
-        self.rovnice += v
-        self.val.set(self.rovnice)
+        if len(self.rovnice) < 13:
+            self.rovnice += v
+            self.val.set(self.rovnice)
 
     def clear_num(self):
         self.rovnice = ""
