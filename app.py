@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 # import tkinter.font as font
+# from PIL import Image, ImageTk
 
 
 RED = "red"
@@ -13,8 +14,8 @@ class Calculator(tk.Tk):
 
         self.title("Kabub Calculator")
 
-        self.geometry("350x470+1000+800")
-        # self.resizable(False, False)
+        self.geometry("350x470+1000+800")   # 350x470
+        self.resizable(False, False)
 
         self.val = tk.StringVar()
         self.val.set("0")
@@ -27,10 +28,21 @@ class Calculator(tk.Tk):
         self.display.grid(row=0, column=0, sticky="ne", padx=15, pady=20)
 
         self.keypad = ttk.Frame(self.container)
-        self.keypad.grid(row=1, column=0, sticky="swe", padx=10, pady=10)
+        self.keypad.grid(row=1, column=0, sticky="nswe", padx=10, pady=10)
 
         self.container.rowconfigure(0, weight=1)
         self.container.columnconfigure(0, weight=1)
+
+        self.kp = ttk.Style()
+        self.kp.theme_use("clam")
+        self.kp.configure(
+            "TButton",
+            background="lightblue",
+            foreground="brown",
+            font=("Segoe UI", 20, "bold"),
+            focuscolor="none"
+        )
+        self.kp.map("TButton", background=[("active", "cyan")])
 
         # Keypad buttons
         self.button_01 = tk.Button(
@@ -69,16 +81,17 @@ class Calculator(tk.Tk):
         #     # command=lambda: self.addval("")
         # )
         # button_03.grid(row=1, column=2, padx=2, pady=2)
-        self.kp = ttk.Style()
+
 
         self.button_04 = ttk.Button(
             self.keypad,
             text="DEL",
             cursor="hand2",
+            compound="center",
+            width=2,
             command=lambda: self.remove_num()
         )
-        self.button_04.grid(row=1, column=3, padx=2, pady=2, ipady=40)
-        self.kp.configure("TButton", background="blue", font=("Helvetica bold", 20))
+        self.button_04.grid(row=1, column=3, sticky="nsew", padx=2, pady=2)
         self.bind("<BackSpace>", lambda x: self.remove_num())
 
         self.button_05 = tk.Button(
