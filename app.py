@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, Menu
 # import tkinter.font as font
 # from PIL import Image, ImageTk
 
@@ -35,7 +35,18 @@ class Calculator(tk.Tk):
         self.keypad = ttk.Frame(self.container)
         self.keypad.grid(row=1, column=0, sticky="we", padx=10, pady=10)
 
-        # self.container.columnconfigure(0, weight=1)
+        # Menu bar
+        self.menubar = Menu(self)
+        self.config(menu=self.menubar)
+        self.file_menu = Menu(self.menubar, tearoff=False)
+        self.sub_menu = Menu(self.file_menu, tearoff=False)
+
+        self.file_menu.add_cascade(label="About", menu=self.sub_menu)
+        self.sub_menu.add_command(label="Version")
+        self.file_menu.add_separator()
+        self.file_menu.add_command(label="Exit", command=self.destroy)
+
+        self.menubar.add_cascade(label="File", menu=self.file_menu, underline=0)    # underline=pro key shortcut
 
         # Styling
         self.kp = ttk.Style()
