@@ -31,7 +31,6 @@ class Calculator(tk.Tk):
         self.keypad = ttk.Frame(self.container)
         self.keypad.grid(row=1, column=0, sticky="we", padx=10, pady=10)
 
-
         # self.container.columnconfigure(0, weight=1)
 
         # Styling
